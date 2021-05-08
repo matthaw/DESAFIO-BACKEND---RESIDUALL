@@ -1,6 +1,7 @@
 import { Server } from '@overnightjs/core';
 import express from 'express';
 import { BaseController } from './Controller';
+import { EmailController } from './Controller/EmailController';
 
 export class SetupServer extends Server {
   constructor(private port = 8080) {
@@ -18,7 +19,8 @@ export class SetupServer extends Server {
 
   private setupController(): void {
     const baseController = new BaseController();
-    this.addControllers([baseController]);
+    const emailController = new EmailController();
+    this.addControllers([baseController, emailController]);
   }
 
   public start(): void {
