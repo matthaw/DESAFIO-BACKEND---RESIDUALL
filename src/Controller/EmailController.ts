@@ -1,6 +1,7 @@
 import { Controller, Post } from '@overnightjs/core';
 import { Request, Response } from 'express';
 import { emailValidation } from '../util/emailValidation';
+import { EvaClient } from '../client/EvaClient';
 
 @Controller('mail')
 class EmailController {
@@ -14,6 +15,20 @@ class EmailController {
       status: 'OK',
       code: res.statusCode,
       results: [...result],
+    });
+  }
+
+  @Post('validation/v3')
+  public async validationV3(req: Request, res: Response) {
+    const { email_address } = req.body;
+
+    const evaClient = new EvaClient();
+    const response = await evaClient.fetchData(email_address);
+
+    return res.status(200).send({
+      status: 'OK',
+      code: res.statusCode,
+      results: [...response],
     });
   }
 }
