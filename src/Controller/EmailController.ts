@@ -2,6 +2,7 @@ import { Controller, Post } from '@overnightjs/core';
 import { Request, Response } from 'express';
 import { emailValidation } from '../util/emailValidation';
 import { EvaClient } from '../client/EvaClient';
+import { EmailValidationV1 } from '../database';
 
 @Controller('mail')
 class EmailController {
@@ -10,6 +11,9 @@ class EmailController {
     const { email_address, domain } = req.body;
 
     const result = emailValidation(email_address, domain);
+
+    const database = new EmailValidationV1();
+    result.forEach((rows) => database.create(rows));
 
     return res.status(200).send({
       status: 'OK',
