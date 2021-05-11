@@ -1,8 +1,6 @@
 import { Pool } from 'pg';
 
 export default new Pool({
-  database: 'desafio-backend-residuall',
-  user: 'username',
-  password: 'password',
+  connectionString: 'postgres://<USERNAME>:<PASSWORD>@<HOST>:<PORT>/<DB_NAME>',
   idleTimeoutMillis: 30000,
 });
