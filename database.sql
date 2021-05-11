@@ -21,7 +21,7 @@ create table email_validation_v3 (
 SET timezone = 'America/Sao_Paulo';
 
 alter table email_validation_v1
-add column created_at timestamp with time zone default (now())
+add column created_at timestamp with time zone default (now());
 
 alter table email_validation_v3
-add column created_at timestamp with time zone default (now())
+add column created_at timestamp with time zone default (now());
